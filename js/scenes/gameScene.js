@@ -36,22 +36,40 @@ class GameScene extends Phaser.Scene {
     update(time, delta) {
         this.puntos.forEach(punto => punto.update(this.enemigos, this.puntos));
         this.enemigos.forEach(enemigo => enemigo.update(this.enemigos, this.puntos));
-    
+
         if (this.torresPropias.length > 0 && this.torresPropias[0].vida <= 0) {
-            localStorage.clear();
-            this.mostrarMensaje('Has perdido', 'LevelMapScene');
+            this.detenerJuego('Has perdido', 'LevelMapScene');
             return;
         }
     
         if (this.torresEnemigas.length > 0 && this.torresEnemigas[0].vida <= 0) {
-            localStorage.clear();
-            this.mostrarMensaje('Has ganado', 'LevelMapScene');
+            this.detenerJuego('Has ganado', 'LevelMapScene');
             return; 
         }
     
         this.puntos = this.puntos.filter(punto => punto.sprite.active);
         this.enemigos = this.enemigos.filter(enemigo => enemigo.sprite.active);
     }
+    
+    detenerJuego(mensaje, escenaDestino) {
+        if (this.spawnWorker) {
+            this.spawnWorker.terminate();
+        }
+    
+        if (this.manaWorker) {
+            this.manaWorker.terminate();
+        }
+
+        this.enemigos.forEach(enemigo => {
+            enemigo.stopMoving();
+        });
+    
+        this.enemigos = [];
+        this.puntos = [];
+    
+        this.mostrarMensaje(mensaje, escenaDestino);
+    }
+    
     
     
     loadAssets() {
@@ -106,7 +124,16 @@ class GameScene extends Phaser.Scene {
     initSpawnWorker() {
         this.add.text(550, 450, 'Retirada', this.superTitulo)
         .setInteractive()
-        .on('pointerdown', () => this.scene.start('MenuScene'));
+        .on('pointerdown', () => {
+            this.retirar();
+            setTimeout(() => {
+                this.scene.start('MenuScene'); 
+            }, 100); 
+        });
+
+
+
+
         const nivelDetalles = JSON.parse(localStorage.getItem('nivelDetalles'));
         let index = 0;
 
@@ -222,6 +249,7 @@ mostrarMensaje(texto, escenaDestino) {
             if (texto === 'Has ganado') {
                 this.sumarRecompensa(); 
             }
+            this.retirar.call(this);
 
             this.scene.start(escenaDestino);
         });
@@ -230,6 +258,12 @@ mostrarMensaje(texto, escenaDestino) {
 
 sumarRecompensa() {
     const nivelDetalles = JSON.parse(localStorage.getItem('nivelDetalles'));
+
+    if (!nivelDetalles || !nivelDetalles.recompensa) {
+        console.error('Recompensa o nivelDetalles no encontrados');
+        return;
+    }
+
     const recompensa = nivelDetalles.recompensa;
 
     obtenerDatosJugador()
@@ -248,11 +282,25 @@ sumarRecompensa() {
                     data.desbloqueados.push(unidadDesbloquear);
                 }
             }
-
+            this.retirar();
             enviarDatosActualizados(data);
         })
         .catch(error => console.error('Error sumando la recompensa:', error));
 }
+
+    retirar() {
+        
+        localStorage.removeItem('misUnidades');
+        localStorage.removeItem('nivelDetalles');
+        localStorage.removeItem('unidades');
+    
+    }
+
+    
+    
+    
+    
+
 
 
 

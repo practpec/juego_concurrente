@@ -77,6 +77,7 @@ export class Unidad {
     }
 
     stopMoving() {
+
         this.moviendo = false;
         this.worker.postMessage('detener'); 
     }
@@ -108,6 +109,7 @@ export class Unidad {
             }
         }
     }
+    
 
     atacarTorre(torre) {
         if (!this.atacando) {
@@ -139,23 +141,33 @@ export class Unidad {
 
     revisarColisionOContinuar() {
         let hayColision = false;
-
+    
         if (this.esEnemigo) {
             hayColision = this.checkCollision(this.scene.puntos, false);
         } else {
-            hayColision = this.checkCollision(this.scene.enemigos, true);
+            hayColision = this.checkCollision(this.scene.enemigos, true); 
         }
-
         if (!hayColision) {
+            const torres = this.esEnemigo ? this.scene.torresPropias : this.scene.torresEnemigas;
+            for (const torre of torres) {
+                const distancia = Phaser.Math.Distance.Between(this.sprite.x, this.sprite.y, torre.sprite.x, torre.sprite.y);
+                const distanciaMinima = 160;
+    
+                if (distancia <= distanciaMinima) {
+                    this.atacarTorre(torre);
+                    return true;
+                }
+            }
             this.startMoving(this.direccion);
         }
     }
+    
 
     checkCollision(unidades, esEnemigo) {
         for (const unidad of unidades) {
             if (this !== unidad && this.esEnemigo !== esEnemigo) {
                 const distancia = Phaser.Math.Distance.Between(this.sprite.x, this.sprite.y, unidad.sprite.x, unidad.sprite.y);
-                const distanciaMinima = 55;
+                const distanciaMinima = 50;
     
                 if (distancia <= distanciaMinima) {
                     this.oponente = unidad; 
@@ -168,7 +180,7 @@ export class Unidad {
         const torres = this.esEnemigo ? this.scene.torresPropias : this.scene.torresEnemigas;
         for (const torre of torres) {
             const distancia = Phaser.Math.Distance.Between(this.sprite.x, this.sprite.y, torre.sprite.x, torre.sprite.y);
-            const distanciaMinima = 175;
+            const distanciaMinima = 160;
 
             if (distancia <= distanciaMinima) {
                 this.atacarTorre(torre);
@@ -180,7 +192,6 @@ export class Unidad {
     }
     
     
-
     update(enemigos, misUnidades) {
         if (this.moviendo) {
             if (this.esEnemigo) {
@@ -189,16 +200,15 @@ export class Unidad {
                 }
             } else {
                 if (!this.checkCollision(enemigos, true)) {
-                    this.checkCollision(this.scene.torresEnemigas, true);
+                    this.checkCollision(this.scene.torresEnemigas, true); 
                 }
             }
         }
-    
-        if (this.direccion === 1 && this.sprite.x >= 1050) { 
+        if (this.direccion === 1 && this.sprite.x >= 1070) {
             this.stopMoving();
-        } else if (this.direccion === -1 && this.sprite.x <= 150) { 
+        } else if (this.direccion === -1 && this.sprite.x <= 140) {
             this.stopMoving();
         }
-    }
+    }  
     
 }

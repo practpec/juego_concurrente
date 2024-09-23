@@ -1,19 +1,19 @@
 {
   "jugador": {
     "nivelActual": 1,
-    "experiencia": 80,
-    "monedas": 100
+    "experiencia": 50,
+    "monedas": 50
   },
   "mis_unidades": [
     {
       "id": 1,
-      "nivel_actual": 2
+      "nivel_actual": 1
     }
   ],
   "desbloqueados": [
     {
       "id": 1,
-      "nivel_actual": 2
+      "nivel_actual": 1
     }
   ],
   "unidades": [

@@ -19,16 +19,18 @@ export class Torre {
 
     recibirDano(cantidad) {
         this.vida -= cantidad;
-        console.log(this.vida)
+        console.log(this.vida);
         this.vidaTexto.setText(`Vida: ${this.vida}`);
         if (this.vida <= 0) {
             this.destruir();
         }
     }
-
+    
     destruir() {
         this.sprite.destroy();
         this.vidaTexto.destroy();
         console.log('Torre destruida');
+        this.attackWorker.terminate();
     }
+    
 }

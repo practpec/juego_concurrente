@@ -1,28 +1,30 @@
-import fs from 'fs';
-import path from 'path';
+const express = require('express');
+const fs = require('fs');
+const bodyParser = require('body-parser');
+const path = require('path');
 
-export default function handler(req, res) {
-    const rutaArchivo = path.join(process.cwd(), 'data', 'data.json');
+const app = express();
 
-    if (req.method === 'POST') {
-        // Manejo del POST para actualizar datos
-        fs.writeFile(rutaArchivo, JSON.stringify(req.body, null, 2), (err) => {
-            if (err) {
-                console.error('Error escribiendo el archivo:', err);
-                return res.status(500).json({ error: 'Error escribiendo el archivo.' });
-            }
-            res.status(200).json({ message: 'Datos actualizados correctamente.' });
-        });
-    } else if (req.method === 'GET') {
-        // Manejo del GET para obtener datos
-        fs.readFile(rutaArchivo, 'utf8', (err, data) => {
-            if (err) {
-                console.error('Error leyendo el archivo:', err);
-                return res.status(500).json({ error: 'Error leyendo el archivo.' });
-            }
-            res.status(200).json(JSON.parse(data));
-        });
-    } else {
-        res.status(405).json({ message: 'Método no permitido' });
-    }
-}
+app.use(bodyParser.json());
+
+app.get('/data', (req, res) => {
+    fs.readFile(path.join(__dirname, '../data/data.json'), 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error leyendo el archivo.');
+        }
+        res.json(JSON.parse(data));
+    });
+});
+
+app.post('/data', (req, res) => {
+    fs.writeFile(path.join(__dirname, '../data/data.json'), JSON.stringify(req.body, null, 2), (err) => {
+        if (err) {
+            return res.status(500).send('Error escribiendo el archivo.');
+        }
+        res.send('Datos actualizados correctamente.');
+    });
+});
+
+app.listen(process.env.PORT || 3000, () => {
+    console.log(`Servidor corriendo`);
+});
