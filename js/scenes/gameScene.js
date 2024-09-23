@@ -235,19 +235,23 @@ sumarRecompensa() {
             data.jugador.monedas += recompensa.oro;
             data.jugador.experiencia += recompensa.experiencia;
 
-        
             if (nivelDetalles.unidad_desbloquear !== null) {
                 const unidadDesbloquear = {
                     id: nivelDetalles.unidad_desbloquear,
-                    nivel_actual: 1
+                    nivel_actual: 1 
                 };
-                data.desbloqueados.push(unidadDesbloquear);
+
+                const unidadExistente = data.desbloqueados.find(u => u.id === unidadDesbloquear.id);
+                if (!unidadExistente) {
+                    data.desbloqueados.push(unidadDesbloquear);
+                }
             }
 
             enviarDatosActualizados(data);
         })
         .catch(error => console.error('Error sumando la recompensa:', error));
 }
+
 
 
 
