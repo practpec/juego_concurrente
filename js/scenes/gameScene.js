@@ -1,6 +1,6 @@
 import { Unidad } from '../models/unidad.js';
 import { Torre } from '../models/torre.js'; 
-
+import { enviarDatosActualizados, obtenerDatosJugador } from '../dataManager.js';
 class GameScene extends Phaser.Scene {
     constructor() {
         super({ key: 'GameScene' });
@@ -38,11 +38,13 @@ class GameScene extends Phaser.Scene {
         this.enemigos.forEach(enemigo => enemigo.update(this.enemigos, this.puntos));
     
         if (this.torresPropias.length > 0 && this.torresPropias[0].vida <= 0) {
+            localStorage.clear();
             this.mostrarMensaje('Has perdido', 'LevelMapScene');
             return;
         }
     
         if (this.torresEnemigas.length > 0 && this.torresEnemigas[0].vida <= 0) {
+            localStorage.clear();
             this.mostrarMensaje('Has ganado', 'LevelMapScene');
             return; 
         }
@@ -263,29 +265,4 @@ sumarRecompensa() {
 
 export default GameScene;
 
-function enviarDatosActualizados(data) {
-    fetch('http://localhost:3000/data', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.text())
-    .then(result => {
-        console.log('Datos actualizados correctamente:', result);
-    })
-    .catch(error => {
-        console.error('Error enviando los datos al servidor:', error);
-    });
-}
-
-function obtenerDatosJugador() {
-    return fetch('http://localhost:3000/data')
-        .then(response => response.json())
-        .catch(error => {
-            console.error('Error obteniendo los datos:', error);
-            throw error;
-        });
-}
 

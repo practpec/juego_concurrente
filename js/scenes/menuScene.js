@@ -1,3 +1,5 @@
+import { enviarDatosActualizados, obtenerDatosJugador } from '../dataManager.js';
+
 class MenuScene extends Phaser.Scene {
     constructor() {
         super({ key: 'MenuScene' });
@@ -10,19 +12,24 @@ class MenuScene extends Phaser.Scene {
         this.loadAssets();
     }
 
-    create() {
+    async create() {
         this.renderBackground();
         this.renderTitulo();
-        this.dataLocal = this.cache.json.get('data');
-        this.renderPlayerInfo();
-        this.renderUnidadesDesbloqueadas();
-        this.renderUnidadesSeleccionadas();
+        
+        try {
+            this.dataLocal = await obtenerDatosJugador();
+            this.renderPlayerInfo();
+            this.renderUnidadesDesbloqueadas();
+            this.renderUnidadesSeleccionadas();
+        } catch (error) {
+            console.error('Error al cargar los datos del servidor:', error);
+        }
     }
 
     loadAssets() {
         this.load.image('fondo', '/images/campaña.png'); 
-        this.load.json('data', '/data/data.json');
     }
+
 
     renderBackground() {
         this.add.image(600, 250, 'fondo').setOrigin(0.5);
@@ -120,15 +127,23 @@ class MenuScene extends Phaser.Scene {
     renderDetailsText(unidad) {
         const detailsY = 200;
         const estiloDetalles = { fontFamily: 'Pixelify Sans', fontSize: '20px', fill: '#000', backgroundColor: '#D9C99A' };
-        
+    
+        const nivelActual = this.dataLocal.mis_unidades.find(u => u.id === unidad.id)?.nivel_actual || 1;
+    
+        const vidaAumentada = Math.floor(unidad.vida * Math.pow(1.1, nivelActual - 1));
+        const ataqueAumentado = Math.floor(unidad.ataque * Math.pow(1.1, nivelActual - 1));
+        const precioMejoraAumentado = Math.floor(unidad.precio_mejora * Math.pow(1.1, nivelActual - 1));
+    
         this.detailsTexts.push(this.add.text(600, detailsY - 120, `${unidad.nombre}`, { ...estiloDetalles, fontSize: '24px' }).setOrigin(0.5));
-        this.detailsTexts.push(this.add.text(600, detailsY - 80, `Vida: ${unidad.vida}`, estiloDetalles).setOrigin(0.5));
-        this.detailsTexts.push(this.add.text(600, detailsY - 50, `Ataque: ${unidad.ataque}`, estiloDetalles).setOrigin(0.5));
+        this.detailsTexts.push(this.add.text(600, detailsY - 80, `Vida: ${vidaAumentada}`, estiloDetalles).setOrigin(0.5));
+        this.detailsTexts.push(this.add.text(600, detailsY - 50, `Ataque: ${ataqueAumentado}`, estiloDetalles).setOrigin(0.5));
         this.detailsTexts.push(this.add.text(600, detailsY - 20, `Velocidad: ${unidad.velocidad}`, estiloDetalles).setOrigin(0.5));
         this.detailsTexts.push(this.add.text(600, detailsY + 10, `Vel. Enfriamiento: ${unidad.velocidad_enfriamiento}`, estiloDetalles).setOrigin(0.5));
-        this.detailsTexts.push(this.add.text(600, detailsY + 40, `Precio Mejora: ${unidad.precio_mejora}`, estiloDetalles).setOrigin(0.5));
+        this.detailsTexts.push(this.add.text(600, detailsY + 40, `Precio Mejora: ${precioMejoraAumentado}`, estiloDetalles).setOrigin(0.5));
         this.detailsTexts.push(this.add.text(600, detailsY + 70, `Precio Mana: ${unidad.precio_mana}`, estiloDetalles).setOrigin(0.5));
     }
+    
+    
 
     renderDetailsButtons(unidad, level) {
         const detailsY = 200;
@@ -159,10 +174,13 @@ class MenuScene extends Phaser.Scene {
             return;
         }
     
-        if (unidad.precio_mejora > this.dataLocal.jugador.monedas) {
-            console.log('No tienes suficientes monedas para mejorar esta unidad.');
-            return;
-        }
+        // Calcular el precio de mejora real
+    const costoMejora = Math.floor(unidad.precio_mejora * Math.pow(1.1, unidadDesbloqueada.nivel_actual));
+
+    if (costoMejora > this.dataLocal.jugador.monedas) {
+        console.log('No tienes suficientes monedas para mejorar esta unidad.');
+        return;
+    }
     
         if (unidadDesbloqueada) {
             unidadDesbloqueada.nivel_actual += 1;
@@ -170,13 +188,11 @@ class MenuScene extends Phaser.Scene {
         }
     
         unidadSeleccionada.nivel_actual += 1;
-        this.dataLocal.jugador.monedas -= unidad.precio_mejora;
+        this.dataLocal.jugador.monedas -= costoMejora
     
-        this.actualizarData(this.dataLocal);
+        enviarDatosActualizados(this.dataLocal);
     }
     
-    
-
     agregarUnidad(unidad, level) {
         const seleccionadasIds = this.dataLocal.mis_unidades.map(s => s.id);
         
@@ -196,7 +212,6 @@ class MenuScene extends Phaser.Scene {
         this.actualizarData(this.dataLocal);
     }
     
-
     clearDetails() {
         this.detailsCard.setVisible(false);
         this.detailsTexts.forEach(text => text.setVisible(false));
@@ -206,25 +221,7 @@ class MenuScene extends Phaser.Scene {
         this.detailsButtons = [];
     }
 
-    actualizarData(data) {
-        fetch('http://localhost:3000/data', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al actualizar el JSON');
-            }
-            return response.text();
-        })
-        .then(message => {
-            console.log(message);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
+    
 }
 
 export default MenuScene;

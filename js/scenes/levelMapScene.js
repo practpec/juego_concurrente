@@ -1,3 +1,5 @@
+import { enviarDatosActualizados, obtenerDatosJugador } from '../dataManager.js';
+
 class LevelMapScene extends Phaser.Scene {
     constructor() {
         super({ key: 'LevelMapScene' });
@@ -6,10 +8,9 @@ class LevelMapScene extends Phaser.Scene {
 
     preload() {
         this.load.image('fondo', '/images/campaña.png'); 
-        this.load.json('data', '/data/data.json');
     }
 
-    create() {
+    async create() {
         this.add.image(600, 250, 'fondo').setOrigin(0.5);
 
         const estiloTexto = { fontFamily: 'Pixelify Sans', fontSize: '20px', fill: '#000' }; 
@@ -17,14 +18,20 @@ class LevelMapScene extends Phaser.Scene {
         const superTitulo = { fontFamily: 'Pixelify Sans', fontSize: '40px', fill: '#000' }; 
 
         this.add.text(500, 20, 'Mapa de Niveles', superTitulo);
-
         this.add.text(20, 20, 'Menu Principal', estiloTitulo)
             .setInteractive()
             .on('pointerdown', () => this.scene.start('MenuScene'));
 
-        
-        this.nivelData = this.cache.json.get('data');
+        try {
+            // Obtener datos del servidor
+            this.nivelData = await obtenerDatosJugador();
+            this.renderNiveles(estiloTexto);
+        } catch (error) {
+            console.error('Error al cargar los datos del servidor:', error);
+        }
+    }
 
+    renderNiveles(estiloTexto) {
         const niveles = 20;
         const camino = [];
 
@@ -57,23 +64,18 @@ class LevelMapScene extends Phaser.Scene {
     seleccionarNivel(nivelSeleccionado) {
         const nivelDetalles = this.getDetallesNivel(nivelSeleccionado);
         const unidadesConEstadisticas = this.getMisUnidadesConEstadisticas();
-    
-        
+
         localStorage.setItem('nivelDetalles', JSON.stringify(nivelDetalles));
         localStorage.setItem('misUnidades', JSON.stringify(unidadesConEstadisticas));
         localStorage.setItem('unidades', JSON.stringify(this.nivelData.unidades));
-    
+
         this.scene.start('GameScene');
-    }    
+    }
 
     getDetallesNivel(nivelSeleccionado) {
-        
         const nivel = this.nivelData.niveles.find(n => n.nivel === nivelSeleccionado);
-    
-        
         const detallesUnidades = this.nivelData.unidades;
-    
-        
+
         const unidadesConDetalles = nivel.unidades.map(unidad => {
             const unidadBase = detallesUnidades.find(u => u.id === unidad.id);
             const estadisticasModificadas = this.calcularEstadisticas(unidadBase, unidad.nivel_unidad);
@@ -83,19 +85,17 @@ class LevelMapScene extends Phaser.Scene {
                 ...estadisticasModificadas
             };
         });
-    
+
         return {
             ...nivel,
             unidades: unidadesConDetalles 
         };
     }
-    
-    
+
     getMisUnidadesConEstadisticas() {
         const misUnidades = this.nivelData.mis_unidades;
         const detallesUnidades = this.nivelData.unidades;
-    
-        
+
         return misUnidades.map(unidad => {
             const unidadBase = detallesUnidades.find(u => u.id === unidad.id);
             const estadisticasModificadas = this.calcularEstadisticas(unidadBase, unidad.nivel_actual);
@@ -105,43 +105,7 @@ class LevelMapScene extends Phaser.Scene {
             };
         });
     }
-    
-    getUnidadesDelNivelConEstadisticas(nivelSeleccionado) {
-        const detallesNivel = this.getDetallesNivel(nivelSeleccionado);
-        const detallesUnidades = this.nivelData.unidades;
-    
-        
-        const unidadesDelNivel = detallesNivel.unidades.map(unidad => {
-            const unidadBase = detallesUnidades.find(u => u.id === unidad.id);
-            const estadisticasModificadas = this.calcularEstadisticas(unidadBase, unidad.nivel_unidad);
-            return {
-                id: unidadBase.id,
-                nombre: unidadBase.nombre,
-                vida: estadisticasModificadas.vida,
-                ataque: estadisticasModificadas.ataque,
-                velocidad: unidadBase.velocidad,
-                velocidad_enfriamiento: unidadBase.velocidad_enfriamiento,
-                precio_mejora: estadisticasModificadas.precio_mejora,
-                precio_mana: unidadBase.precio_mana,
-                nivel_base: unidadBase.nivel_base,
-                imagen: unidadBase.imagen,
-                caminar: unidadBase.caminar,
-                atacar: unidadBase.atacar
-            };
-        });
-    
-        return {
-            nivelDetalles: {
-                algorit: detallesNivel.algorit,
-                nivel: detallesNivel.nivel,
-                recompensa: detallesNivel.recompensa,
-                unidad_desbloquear: detallesNivel.unidad_desbloquear,
-                unidades: unidadesDelNivel
-            },
-            misUnidades: this.getMisUnidadesConEstadisticas() 
-        };
-    }
-    
+
     calcularEstadisticas(unidadBase, nivel) {
         const factor = 0.10;
         return {
@@ -150,8 +114,6 @@ class LevelMapScene extends Phaser.Scene {
             precio_mejora: Math.floor(unidadBase.precio_mejora * (1 + factor * (nivel - 1)))
         };
     }
-    
-       
 }
 
 export default LevelMapScene;
