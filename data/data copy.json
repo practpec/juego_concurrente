@@ -1,0 +1,882 @@
+{
+  "jugador": {
+    "nivelActual": 1,
+    "experiencia": 50,
+    "monedas": 50
+  },
+  "mis_unidades": [
+    {
+      "id": 1,
+      "nivel_actual": 1
+    },
+    {
+      "id": 2,
+      "nivel_actual": 1
+    },
+    {
+      "id": 3,
+      "nivel_actual": 1
+    }
+  ],
+  "unidades": [
+    {
+      "id": 1,
+      "nombre": "Infantería Ligera",
+      "vida": 100,
+      "ataque": 10,
+      "velocidad": 5,
+      "velocidad_enfriamiento": 5,
+      "precio_mejora": 50,
+      "precio_mana": 100,
+      "nivel_base": 1,
+      "imagen": "/images/infanteria-l/detener.png",
+      "caminar": [
+        "/images/infanteria-l/caminar/1.png",
+        "/images/infanteria-l/caminar/2.png"
+      ],
+      "atacar": [
+        "/images/infanteria-l/atacar/1.png",
+        "/images/infanteria-l/atacar/2.png",
+        "/images/infanteria-l/atacar/3.png"
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Arqueros",
+      "vida": 80,
+      "ataque": 12,
+      "velocidad": 4,
+      "velocidad_enfriamiento": 6,
+      "precio_mejora": 40,
+      "precio_mana": 80,
+      "nivel_base": 1,
+      "imagen": "/images/arqueros/detener.png",
+      "caminar": [
+        "/images/arqueros/caminar/1.png",
+        "/images/arqueros/caminar/2.png"
+      ],
+      "atacar": [
+        "/images/arqueros/atacar/1.png",
+        "/images/arqueros/atacar/2.png"
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Caballería",
+      "vida": 120,
+      "ataque": 15,
+      "velocidad": 6,
+      "velocidad_enfriamiento": 7,
+      "precio_mejora": 70,
+      "precio_mana": 120,
+      "nivel_base": 1,
+      "imagen": "/images/caballeria/detener.png",
+      "caminar": [
+        "/images/caballeria/caminar/1.png",
+        "/images/caballeria/caminar/2.png"
+      ],
+      "atacar": [
+        "/images/caballeria/atacar/1.png",
+        "/images/caballeria/atacar/2.png"
+      ]
+    },
+    {
+      "id": 4,
+      "nombre": "Mago",
+      "vida": 60,
+      "ataque": 20,
+      "velocidad": 3,
+      "velocidad_enfriamiento": 5,
+      "precio_mejora": 60,
+      "precio_mana": 150,
+      "nivel_base": 1,
+      "imagen": "/images/mago/detener.png",
+      "caminar": [
+        "/images/mago/caminar/1.png",
+        "/images/mago/caminar/2.png"
+      ],
+      "atacar": [
+        "/images/mago/atacar/1.png",
+        "/images/mago/atacar/2.png"
+      ]
+    },
+    {
+      "id": 5,
+      "nombre": "Explorador",
+      "vida": 70,
+      "ataque": 8,
+      "velocidad": 7,
+      "velocidad_enfriamiento": 4,
+      "precio_mejora": 30,
+      "precio_mana": 60,
+      "nivel_base": 1,
+      "imagen": "/images/explorador/detener.png",
+      "caminar": [
+        "/images/explorador/caminar/1.png",
+        "/images/explorador/caminar/2.png"
+      ],
+      "atacar": [
+        "/images/explorador/atacar/1.png",
+        "/images/explorador/atacar/2.png"
+      ]
+    },
+    {
+      "id": 8,
+      "nombre": "Guerrero",
+      "vida": 100,
+      "ataque": 15,
+      "velocidad": 4,
+      "velocidad_enfriamiento": 5,
+      "precio_mejora": 50,
+      "precio_mana": 90,
+      "nivel_base": 1,
+      "imagen": "/images/guerrero/detener.png",
+      "caminar": [
+        "/images/guerrero/caminar/1.png",
+        "/images/guerrero/caminar/2.png"
+      ],
+      "atacar": [
+        "/images/guerrero/atacar/1.png",
+        "/images/guerrero/atacar/2.png"
+      ]
+    },
+    {
+      "id": 7,
+      "nombre": "Infantería Pesada",
+      "vida": 150,
+      "ataque": 10,
+      "velocidad": 3,
+      "velocidad_enfriamiento": 6,
+      "precio_mejora": 70,
+      "precio_mana": 100,
+      "nivel_base": 1,
+      "imagen": "/images/infanteria_pesada/detener.png",
+      "caminar": [
+        "/images/infanteria_pesada/caminar/1.png",
+        "/images/infanteria_pesada/caminar/2.png"
+      ],
+      "atacar": [
+        "/images/infanteria_pesada/atacar/1.png",
+        "/images/infanteria_pesada/atacar/2.png"
+      ]
+    }
+  ],
+  "seleccionadas": [
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    }
+  ],
+  "niveles": [
+    {
+      "unidades": [
+        {
+          "id": 1,
+          "nivel_unidad": 1
+        }
+      ],
+      "algorit": [
+        1
+      ],
+      "nivel": 1,
+      "recompensa": {
+        "oro": 50,
+        "experiencia": 10
+      },
+      "unidad_desbloquear": null
+    },
+    {
+      "unidades": [
+        {
+          "id": 1,
+          "nivel_unidad": 1
+        },
+        {
+          "id": 2,
+          "nivel_unidad": 1
+        }
+      ],
+      "algorit": [
+        1,
+        2
+      ],
+      "nivel": 2,
+      "recompensa": {
+        "oro": 60,
+        "experiencia": 15
+      },
+      "unidad_desbloquear": 2
+    },
+    {
+      "unidades": [
+        {
+          "id": 1,
+          "nivel_unidad": 2
+        },
+        {
+          "id": 2,
+          "nivel_unidad": 1
+        }
+      ],
+      "algorit": [
+        1,
+        2,
+        1,
+        1,
+        2,
+        2
+      ],
+      "nivel": 3,
+      "recompensa": {
+        "oro": 70,
+        "experiencia": 20
+      },
+      "unidad_desbloquear": null
+    },
+    {
+      "unidades": [
+        {
+          "id": 1,
+          "nivel_unidad": 2
+        },
+        {
+          "id": 2,
+          "nivel_unidad": 2
+        },
+        {
+          "id": 3,
+          "nivel_unidad": 1
+        }
+      ],
+      "algorit": [
+        1,
+        2,
+        3
+      ],
+      "nivel": 4,
+      "recompensa": {
+        "oro": 80,
+        "experiencia": 25
+      },
+      "unidad_desbloquear": 3
+    },
+    {
+      "unidades": [
+        {
+          "id": 1,
+          "nivel_unidad": 2
+        },
+        {
+          "id": 2,
+          "nivel_unidad": 2
+        },
+        {
+          "id": 3,
+          "nivel_unidad": 2
+        }
+      ],
+      "algorit": [
+        1,
+        2,
+        3,
+        3,
+        2,
+        1
+      ],
+      "nivel": 5,
+      "recompensa": {
+        "oro": 90,
+        "experiencia": 30
+      },
+      "unidad_desbloquear": null
+    },
+    {
+      "unidades": [
+        {
+          "id": 1,
+          "nivel_unidad": 3
+        },
+        {
+          "id": 2,
+          "nivel_unidad": 2
+        },
+        {
+          "id": 3,
+          "nivel_unidad": 2
+        },
+        {
+          "id": 4,
+          "nivel_unidad": 2
+        }
+      ],
+      "algorit": [
+        1,
+        2,
+        3,
+        1,
+        4,
+        2,
+        3,
+        4,
+        1,
+        4,
+        2
+      ],
+      "nivel": 6,
+      "recompensa": {
+        "oro": 100,
+        "experiencia": 35
+      },
+      "unidad_desbloquear": 4
+    },
+    {
+      "unidades": [
+        {
+          "id": 1,
+          "nivel_unidad": 3
+        },
+        {
+          "id": 2,
+          "nivel_unidad": 3
+        },
+        {
+          "id": 3,
+          "nivel_unidad": 2
+        },
+        {
+          "id": 4,
+          "nivel_unidad": 2
+        }
+      ],
+      "algorit": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "nivel": 7,
+      "recompensa": {
+        "oro": 110,
+        "experiencia": 40
+      },
+      "unidad_desbloquear": null
+    },
+    {
+      "unidades": [
+        {
+          "id": 1,
+          "nivel_unidad": 4
+        },
+        {
+          "id": 2,
+          "nivel_unidad": 3
+        },
+        {
+          "id": 3,
+          "nivel_unidad": 3
+        },
+        {
+          "id": 4,
+          "nivel_unidad": 2
+        },
+        {
+          "id": 5,
+          "nivel_unidad": 2
+        }
+      ],
+      "algorit": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        1,
+        2,
+        4,
+        5
+      ],
+      "nivel": 8,
+      "recompensa": {
+        "oro": 120,
+        "experiencia": 50
+      },
+      "unidad_desbloquear": 5
+    },
+    {
+      "unidades": [
+        {
+          "id": 1,
+          "nivel_unidad": 4
+        },
+        {
+          "id": 2,
+          "nivel_unidad": 4
+        },
+        {
+          "id": 3,
+          "nivel_unidad": 3
+        },
+        {
+          "id": 4,
+          "nivel_unidad": 3
+        },
+        {
+          "id": 5,
+          "nivel_unidad": 2
+        }
+      ],
+      "algorit": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        1,
+        2,
+        4,
+        5
+      ],
+      "nivel": 9,
+      "recompensa": {
+        "oro": 130,
+        "experiencia": 55
+      },
+      "unidad_desbloquear": null
+    },
+    {
+      "unidades": [
+        {
+          "id": 2,
+          "nivel_unidad": 4
+        },
+        {
+          "id": 3,
+          "nivel_unidad": 3
+        },
+        {
+          "id": 4,
+          "nivel_unidad": 3
+        },
+        {
+          "id": 5,
+          "nivel_unidad": 3
+        },
+        {
+          "id": 6,
+          "nivel_unidad": 4
+        }
+      ],
+      "algorit": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        6,
+        2,
+        3,
+        2,
+        4,
+        5,
+        6
+      ],
+      "nivel": 10,
+      "recompensa": {
+        "oro": 140,
+        "experiencia": 60
+      },
+      "unidad_desbloquear": 6
+    },
+    {
+      "unidades": [
+        {
+          "id": 3,
+          "nivel_unidad": 4
+        },
+        {
+          "id": 4,
+          "nivel_unidad": 3
+        },
+        {
+          "id": 5,
+          "nivel_unidad": 3
+        },
+        {
+          "id": 6,
+          "nivel_unidad": 3
+        },
+        {
+          "id": 7,
+          "nivel_unidad": 4
+        }
+      ],
+      "algorit": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "nivel": 11,
+      "recompensa": {
+        "oro": 150,
+        "experiencia": 65
+      },
+      "unidad_desbloquear": null
+    },
+    {
+      "unidades": [
+        {
+          "id": 3,
+          "nivel_unidad": 4
+        },
+        {
+          "id": 4,
+          "nivel_unidad": 4
+        },
+        {
+          "id": 5,
+          "nivel_unidad": 3
+        },
+        {
+          "id": 6,
+          "nivel_unidad": 2
+        },
+        {
+          "id": 7,
+          "nivel_unidad": 2
+        }
+      ],
+      "algorit": [
+        5,
+        3,
+        7,
+        4,
+        6,
+        6,
+        5,
+        3,
+        3
+      ],
+      "nivel": 12,
+      "recompensa": {
+        "oro": 160,
+        "experiencia": 70
+      },
+      "unidad_desbloquear": 7
+    },
+    {
+      "unidades": [
+        {
+          "id": 1,
+          "nivel_unidad": 6
+        },
+        {
+          "id": 4,
+          "nivel_unidad": 4
+        },
+        {
+          "id": 5,
+          "nivel_unidad": 4
+        },
+        {
+          "id": 6,
+          "nivel_unidad": 5
+        },
+        {
+          "id": 7,
+          "nivel_unidad": 4
+        }
+      ],
+      "algorit": [
+        1,
+        4,
+        7,
+        2,
+        6,
+        6,
+        1,
+        7
+      ],
+      "nivel": 13,
+      "recompensa": {
+        "oro": 170,
+        "experiencia": 75
+      },
+      "unidad_desbloquear": null
+    },
+    {
+      "unidades": [
+        {
+          "id": 1,
+          "nivel_unidad": 7
+        },
+        {
+          "id": 2,
+          "nivel_unidad": 6
+        },
+        {
+          "id": 3,
+          "nivel_unidad": 5
+        },
+        {
+          "id": 4,
+          "nivel_unidad": 4
+        },
+        {
+          "id": 5,
+          "nivel_unidad": 4
+        }
+      ],
+      "algorit": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        1,
+        2,
+        3,
+        4
+      ],
+      "nivel": 14,
+      "recompensa": {
+        "oro": 180,
+        "experiencia": 80
+      },
+      "unidad_desbloquear": null
+    },
+    {
+      "unidades": [
+        {
+          "id": 3,
+          "nivel_unidad": 6
+        },
+        {
+          "id": 4,
+          "nivel_unidad": 5
+        },
+        {
+          "id": 5,
+          "nivel_unidad": 4
+        },
+        {
+          "id": 6,
+          "nivel_unidad": 6
+        },
+        {
+          "id": 7,
+          "nivel_unidad": 7
+        }
+      ],
+      "algorit": [
+        7,
+        6,
+        5,
+        4,
+        3,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "nivel": 15,
+      "recompensa": {
+        "oro": 190,
+        "experiencia": 85
+      },
+      "unidad_desbloquear": null
+    },
+    {
+      "unidades": [
+        {
+          "id": 1,
+          "nivel_unidad": 8
+        },
+        {
+          "id": 2,
+          "nivel_unidad": 7
+        },
+        {
+          "id": 4,
+          "nivel_unidad": 5
+        },
+        {
+          "id": 6,
+          "nivel_unidad": 6
+        },
+        {
+          "id": 7,
+          "nivel_unidad": 6
+        }
+      ],
+      "algorit": [
+        1,
+        2,
+        4,
+        6,
+        7
+      ],
+      "nivel": 16,
+      "recompensa": {
+        "oro": 200,
+        "experiencia": 90
+      },
+      "unidad_desbloquear": null
+    },
+    {
+      "unidades": [
+        {
+          "id": 2,
+          "nivel_unidad": 8
+        },
+        {
+          "id": 3,
+          "nivel_unidad": 7
+        },
+        {
+          "id": 4,
+          "nivel_unidad": 5
+        },
+        {
+          "id": 5,
+          "nivel_unidad": 4
+        },
+        {
+          "id": 7,
+          "nivel_unidad": 3
+        }
+      ],
+      "algorit": [
+        2,
+        3,
+        4,
+        5,
+        7
+      ],
+      "nivel": 17,
+      "recompensa": {
+        "oro": 210,
+        "experiencia": 95
+      },
+      "unidad_desbloquear": null
+    },
+    {
+      "unidades": [
+        {
+          "id": 1,
+          "nivel_unidad": 9
+        },
+        {
+          "id": 2,
+          "nivel_unidad": 8
+        },
+        {
+          "id": 3,
+          "nivel_unidad": 7
+        },
+        {
+          "id": 5,
+          "nivel_unidad": 4
+        },
+        {
+          "id": 6,
+          "nivel_unidad": 4
+        }
+      ],
+      "algorit": [
+        1,
+        2,
+        3,
+        5,
+        6
+      ],
+      "nivel": 18,
+      "recompensa": {
+        "oro": 220,
+        "experiencia": 100
+      },
+      "unidad_desbloquear": null
+    },
+    {
+      "unidades": [
+        {
+          "id": 1,
+          "nivel_unidad": 9
+        },
+        {
+          "id": 2,
+          "nivel_unidad": 9
+        },
+        {
+          "id": 3,
+          "nivel_unidad": 8
+        },
+        {
+          "id": 4,
+          "nivel_unidad": 6
+        },
+        {
+          "id": 5,
+          "nivel_unidad": 5
+        }
+      ],
+      "algorit": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "nivel": 19,
+      "recompensa": {
+        "oro": 230,
+        "experiencia": 105
+      },
+      "unidad_desbloquear": null
+    },
+    {
+      "unidades": [
+        {
+          "id": 3,
+          "nivel_unidad": 8
+        },
+        {
+          "id": 4,
+          "nivel_unidad": 6
+        },
+        {
+          "id": 5,
+          "nivel_unidad": 5
+        },
+        {
+          "id": 6,
+          "nivel_unidad": 7
+        },
+        {
+          "id": 7,
+          "nivel_unidad": 10
+        }
+      ],
+      "algorit": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "nivel": 20,
+      "recompensa": {
+        "oro": 250,
+        "experiencia": 110
+      },
+      "unidad_desbloquear": null
+    }
+  ]
+}
