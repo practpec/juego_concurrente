@@ -1,5 +1,5 @@
 export function enviarDatosActualizados(data) {
-    fetch('http://localhost:3000/data', {
+    fetch('https://mini-8pv1dxccz-julio-cesars-projects.vercel.app/data', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -16,7 +16,7 @@ export function enviarDatosActualizados(data) {
 }
 
 export  function obtenerDatosJugador() {
-    return fetch('http://localhost:3000/data')
+    return fetch('https://mini-8pv1dxccz-julio-cesars-projects.vercel.app/data')
         .then(response => response.json())
         .catch(error => {
             console.error('Error obteniendo los datos:', error);
