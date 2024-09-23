@@ -26,7 +26,7 @@ class GameScene extends Phaser.Scene {
         this.initSpawnWorker(); 
 
         this.manaWorker = new Worker('/js/workers/mana.js');
-        this.initManaWorker(); // Inicializa el worker de mana
+        this.initManaWorker(); 
 
         this.manaText = this.add.text(1000, 30, `Mana: ${this.mana}`, this.estiloTexto);
 
@@ -37,15 +37,14 @@ class GameScene extends Phaser.Scene {
         this.puntos.forEach(punto => punto.update(this.enemigos, this.puntos));
         this.enemigos.forEach(enemigo => enemigo.update(this.enemigos, this.puntos));
     
-        // Comprobar vida de las torres
         if (this.torresPropias.length > 0 && this.torresPropias[0].vida <= 0) {
             this.mostrarMensaje('Has perdido', 'LevelMapScene');
-            return; // Detener actualización si se ha perdido
+            return;
         }
     
         if (this.torresEnemigas.length > 0 && this.torresEnemigas[0].vida <= 0) {
             this.mostrarMensaje('Has ganado', 'LevelMapScene');
-            return; // Detener actualización si se ha ganado
+            return; 
         }
     
         this.puntos = this.puntos.filter(punto => punto.sprite.active);
@@ -168,10 +167,10 @@ class GameScene extends Phaser.Scene {
             this.add.text(150 + index * 200, 70, `Enfriamiento: ${unidad.velocidad_enfriamiento}`, this.estiloTexto)
                 .setOrigin(0.5, 0);
     
-            unidad.boton = boton; // Guardamos referencia al botón para luego ocultarlo/mostrarlo
+            unidad.boton = boton;
         });
     
-        this.misUnidades = misUnidades; // Guardamos las unidades para usarlas en otros métodos
+        this.misUnidades = misUnidades; 
     }
     
 
@@ -194,20 +193,18 @@ class GameScene extends Phaser.Scene {
     }
 
     actualizarDatosJugador() {
-    // Leer el archivo data.json
     let data = JSON.parse(localStorage.getItem('data'));
 
-    // Actualizar monedas y experiencia
+
     const recompensa = {
-        oro: 50, // Valor de recompensa
-        experiencia: 10 // Valor de recompensa
+        oro: 50,
+        experiencia: 10 
     };
 
-    // Sumar las recompensas a los valores actuales del jugador
+
     data.jugador.monedas += recompensa.oro;
     data.jugador.experiencia += recompensa.experiencia;
 
-    // Guardar los datos actualizados
     localStorage.setItem('data', JSON.stringify(data));
 }
 
@@ -221,7 +218,7 @@ mostrarMensaje(texto, escenaDestino) {
             botonAceptar.destroy();
 
             if (texto === 'Has ganado') {
-                this.sumarRecompensa();  // Llama a la función para sumar la recompensa
+                this.sumarRecompensa(); 
             }
 
             this.scene.start(escenaDestino);
@@ -231,16 +228,27 @@ mostrarMensaje(texto, escenaDestino) {
 
 sumarRecompensa() {
     const nivelDetalles = JSON.parse(localStorage.getItem('nivelDetalles'));
-    const recompensa = nivelDetalles.recompensa; 
+    const recompensa = nivelDetalles.recompensa;
 
     obtenerDatosJugador()
         .then(data => {
             data.jugador.monedas += recompensa.oro;
             data.jugador.experiencia += recompensa.experiencia;
+
+        
+            if (nivelDetalles.unidad_desbloquear !== null) {
+                const unidadDesbloquear = {
+                    id: nivelDetalles.unidad_desbloquear,
+                    nivel_actual: 1
+                };
+                data.desbloqueados.push(unidadDesbloquear);
+            }
+
             enviarDatosActualizados(data);
         })
         .catch(error => console.error('Error sumando la recompensa:', error));
 }
+
 
 
 
