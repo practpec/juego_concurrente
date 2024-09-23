@@ -1,1 +1,5 @@
 /node_modules
+server.js
+/data
+package.json
+package-lock.json
