@@ -1,32 +1,51 @@
 {
   "jugador": {
     "nivelActual": 1,
-    "experiencia": 50,
-    "monedas": 50
+    "experiencia": 80,
+    "monedas": 100
   },
   "mis_unidades": [
     {
       "id": 1,
-      "nivel_actual": 1
-    },
+      "nivel_actual": 2
+    }
+  ],
+  "desbloqueados": [
     {
-      "id": 2,
-      "nivel_actual": 1
-    },
-    {
-      "id": 3,
-      "nivel_actual": 1
+      "id": 1,
+      "nivel_actual": 2
     }
   ],
   "unidades": [
     {
       "id": 1,
+      "nombre": "Milicia",
+      "vida": 75,
+      "ataque": 7,
+      "velocidad": 3,
+      "velocidad_enfriamiento": 4,
+      "precio_mejora": 50,
+      "precio_mana": 75,
+      "nivel_base": 1,
+      "imagen": "/images/milicia/detener.png",
+      "caminar": [
+        "/images/milicia/caminar/1.png",
+        "/images/milicia/caminar/2.png"
+      ],
+      "atacar": [
+        "/images/milicia/atacar/1.png",
+        "/images/milicia/atacar/2.png",
+        "/images/milicia/atacar/3.png"
+      ]
+    },
+    {
+      "id": 2,
       "nombre": "Infantería Ligera",
       "vida": 100,
-      "ataque": 10,
-      "velocidad": 5,
+      "ataque": 12,
+      "velocidad": 3,
       "velocidad_enfriamiento": 5,
-      "precio_mejora": 50,
+      "precio_mejora": 70,
       "precio_mana": 100,
       "nivel_base": 1,
       "imagen": "/images/infanteria-l/detener.png",
@@ -41,94 +60,55 @@
       ]
     },
     {
-      "id": 2,
-      "nombre": "Arqueros",
-      "vida": 80,
-      "ataque": 12,
-      "velocidad": 4,
-      "velocidad_enfriamiento": 6,
-      "precio_mejora": 40,
-      "precio_mana": 80,
-      "nivel_base": 1,
-      "imagen": "/images/arqueros/detener.png",
-      "caminar": [
-        "/images/arqueros/caminar/1.png",
-        "/images/arqueros/caminar/2.png"
-      ],
-      "atacar": [
-        "/images/arqueros/atacar/1.png",
-        "/images/arqueros/atacar/2.png"
-      ]
-    },
-    {
       "id": 3,
-      "nombre": "Caballería",
-      "vida": 120,
+      "nombre": "Infantería Pesada",
+      "vida": 150,
       "ataque": 15,
-      "velocidad": 6,
+      "velocidad": 3,
       "velocidad_enfriamiento": 7,
-      "precio_mejora": 70,
+      "precio_mejora": 90,
       "precio_mana": 120,
       "nivel_base": 1,
-      "imagen": "/images/caballeria/detener.png",
+      "imagen": "/images/infanteria_p/detener.png",
       "caminar": [
-        "/images/caballeria/caminar/1.png",
-        "/images/caballeria/caminar/2.png"
+        "/images/infanteria_p/caminar/1.png",
+        "/images/infanteria_p/caminar/2.png"
       ],
       "atacar": [
-        "/images/caballeria/atacar/1.png",
-        "/images/caballeria/atacar/2.png"
+        "/images/infanteria_p/atacar/1.png",
+        "/images/infanteria_p/atacar/2.png"
       ]
     },
     {
       "id": 4,
-      "nombre": "Mago",
-      "vida": 60,
-      "ataque": 20,
+      "nombre": "Piquero",
+      "vida": 100,
+      "ataque": 12,
       "velocidad": 3,
-      "velocidad_enfriamiento": 5,
-      "precio_mejora": 60,
-      "precio_mana": 150,
+      "velocidad_enfriamiento": 6,
+      "precio_mejora": 80,
+      "precio_mana": 110,
       "nivel_base": 1,
-      "imagen": "/images/mago/detener.png",
+      "imagen": "/images/piquero/detener.png",
       "caminar": [
-        "/images/mago/caminar/1.png",
-        "/images/mago/caminar/2.png"
+        "/images/piquero/caminar/1.png",
+        "/images/piquero/caminar/2.png"
       ],
       "atacar": [
-        "/images/mago/atacar/1.png",
-        "/images/mago/atacar/2.png"
+        "/images/piquero/atacar/1.png",
+        "/images/piquero/atacar/2.png",
+        "/images/piquero/atacar/3.png"
       ]
     },
     {
       "id": 5,
-      "nombre": "Explorador",
-      "vida": 70,
-      "ataque": 8,
-      "velocidad": 7,
-      "velocidad_enfriamiento": 4,
-      "precio_mejora": 30,
-      "precio_mana": 60,
-      "nivel_base": 1,
-      "imagen": "/images/explorador/detener.png",
-      "caminar": [
-        "/images/explorador/caminar/1.png",
-        "/images/explorador/caminar/2.png"
-      ],
-      "atacar": [
-        "/images/explorador/atacar/1.png",
-        "/images/explorador/atacar/2.png"
-      ]
-    },
-    {
-      "id": 8,
       "nombre": "Guerrero",
-      "vida": 100,
-      "ataque": 15,
-      "velocidad": 4,
-      "velocidad_enfriamiento": 5,
-      "precio_mejora": 50,
-      "precio_mana": 90,
+      "vida": 150,
+      "ataque": 20,
+      "velocidad": 3,
+      "velocidad_enfriamiento": 8,
+      "precio_mejora": 110,
+      "precio_mana": 150,
       "nivel_base": 1,
       "imagen": "/images/guerrero/detener.png",
       "caminar": [
@@ -137,41 +117,33 @@
       ],
       "atacar": [
         "/images/guerrero/atacar/1.png",
-        "/images/guerrero/atacar/2.png"
+        "/images/guerrero/atacar/2.png",
+        "/images/guerrero/atacar/3.png"
       ]
     },
     {
-      "id": 7,
-      "nombre": "Infantería Pesada",
-      "vida": 150,
-      "ataque": 10,
-      "velocidad": 3,
-      "velocidad_enfriamiento": 6,
-      "precio_mejora": 70,
-      "precio_mana": 100,
+      "id": 6,
+      "nombre": "Caballería",
+      "vida": 200,
+      "ataque": 20,
+      "velocidad": 7,
+      "velocidad_enfriamiento": 9,
+      "precio_mejora": 200,
+      "precio_mana": 200,
       "nivel_base": 1,
-      "imagen": "/images/infanteria_pesada/detener.png",
+      "imagen": "/images/caballeria/detener.png",
       "caminar": [
-        "/images/infanteria_pesada/caminar/1.png",
-        "/images/infanteria_pesada/caminar/2.png"
+        "/images/caballeria/caminar/1.png",
+        "/images/caballeria/caminar/2.png"
       ],
       "atacar": [
-        "/images/infanteria_pesada/atacar/1.png",
-        "/images/infanteria_pesada/atacar/2.png"
+        "/images/caballeria/atacar/1.png",
+        "/images/caballeria/atacar/2.png",
+        "/images/caballeria/atacar/3.png"
       ]
     }
   ],
-  "seleccionadas": [
-    {
-      "id": 1
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 2
-    }
-  ],
+  "seleccionadas": [],
   "niveles": [
     {
       "unidades": [
@@ -220,7 +192,7 @@
         },
         {
           "id": 2,
-          "nivel_unidad": 1
+          "nivel_unidad": 2
         }
       ],
       "algorit": [
@@ -242,7 +214,7 @@
       "unidades": [
         {
           "id": 1,
-          "nivel_unidad": 2
+          "nivel_unidad": 3
         },
         {
           "id": 2,
@@ -259,6 +231,7 @@
         3
       ],
       "nivel": 4,
+      "vida_torre": 100,
       "recompensa": {
         "oro": 80,
         "experiencia": 25
@@ -509,18 +482,13 @@
         {
           "id": 6,
           "nivel_unidad": 3
-        },
-        {
-          "id": 7,
-          "nivel_unidad": 4
         }
       ],
       "algorit": [
         3,
         4,
         5,
-        6,
-        7
+        6
       ],
       "nivel": 11,
       "recompensa": {
@@ -546,16 +514,11 @@
         {
           "id": 6,
           "nivel_unidad": 2
-        },
-        {
-          "id": 7,
-          "nivel_unidad": 2
         }
       ],
       "algorit": [
         5,
         3,
-        7,
         4,
         6,
         6,
@@ -568,7 +531,7 @@
         "oro": 160,
         "experiencia": 70
       },
-      "unidad_desbloquear": 7
+      "unidad_desbloquear": null
     },
     {
       "unidades": [
@@ -587,21 +550,15 @@
         {
           "id": 6,
           "nivel_unidad": 5
-        },
-        {
-          "id": 7,
-          "nivel_unidad": 4
         }
       ],
       "algorit": [
         1,
         4,
-        7,
         2,
         6,
         6,
-        1,
-        7
+        1
       ],
       "nivel": 13,
       "recompensa": {
@@ -668,14 +625,9 @@
         {
           "id": 6,
           "nivel_unidad": 6
-        },
-        {
-          "id": 7,
-          "nivel_unidad": 7
         }
       ],
       "algorit": [
-        7,
         6,
         5,
         4,
@@ -683,8 +635,7 @@
         3,
         4,
         5,
-        6,
-        7
+        6
       ],
       "nivel": 15,
       "recompensa": {
@@ -710,18 +661,13 @@
         {
           "id": 6,
           "nivel_unidad": 6
-        },
-        {
-          "id": 7,
-          "nivel_unidad": 6
         }
       ],
       "algorit": [
         1,
         2,
         4,
-        6,
-        7
+        6
       ],
       "nivel": 16,
       "recompensa": {
@@ -747,18 +693,13 @@
         {
           "id": 5,
           "nivel_unidad": 4
-        },
-        {
-          "id": 7,
-          "nivel_unidad": 3
         }
       ],
       "algorit": [
         2,
         3,
         4,
-        5,
-        7
+        5
       ],
       "nivel": 17,
       "recompensa": {
@@ -853,14 +794,10 @@
         },
         {
           "id": 5,
-          "nivel_unidad": 5
+          "nivel_unidad": 8
         },
         {
           "id": 6,
-          "nivel_unidad": 7
-        },
-        {
-          "id": 7,
           "nivel_unidad": 10
         }
       ],
@@ -868,8 +805,7 @@
         3,
         4,
         5,
-        6,
-        7
+        6
       ],
       "nivel": 20,
       "recompensa": {
