@@ -1,5 +1,5 @@
 export function enviarDatosActualizados(datos) {
-    return fetch('/data', { // Cambia aquí para usar la ruta relativa
+    return fetch('https://west-transparent-august.glitch.me/data', { // Cambia la ruta aquí
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -25,7 +25,7 @@ export function enviarDatosActualizados(datos) {
 }
 
 export function obtenerDatosJugador() {
-    return fetch('/data') // Cambia aquí para usar la ruta relativa
+    return fetch('https://west-transparent-august.glitch.me/data')
         .then(response => {
             if (!response.ok) {
                 return response.text().then(text => {
