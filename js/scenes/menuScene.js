@@ -104,6 +104,8 @@ class MenuScene extends Phaser.Scene {
         console.log(`Unidad ${unidadId} quitada.`);
         this.actualizarData(this.dataLocal);
         this.scene.restart();
+        window.location.reload();
+        
     }
     
 
@@ -173,8 +175,7 @@ class MenuScene extends Phaser.Scene {
             console.log('Unidad no encontrada en desbloqueadas.');
             return;
         }
-    
-        // Calcular el precio de mejora real
+
     const costoMejora = Math.floor(unidad.precio_mejora * Math.pow(1.1, unidadDesbloqueada.nivel_actual));
 
     if (costoMejora > this.dataLocal.jugador.monedas) {
@@ -220,6 +221,17 @@ class MenuScene extends Phaser.Scene {
         this.detailsTexts = [];
         this.detailsButtons = [];
     }
+
+    actualizarData(data) {
+        enviarDatosActualizados(data)
+            .then(response => {
+                console.log('Datos actualizados exitosamente', response);
+            })
+            .catch(error => {
+                console.error('Error al actualizar los datos:', error);
+            });
+    }
+    
 
     
 }
